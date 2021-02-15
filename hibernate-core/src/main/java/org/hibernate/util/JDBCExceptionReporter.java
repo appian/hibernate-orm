@@ -231,7 +231,9 @@ public final class JDBCExceptionReporter {
 				        .append( ", SQLState: " )
 				        .append( ex.getSQLState() );
 				log.warn( buf.toString() );
-				log.error( ex.getMessage() );
+				if (!(ex instanceof java.sql.SQLIntegrityConstraintViolationException)) {
+				  log.error( ex.getMessage() );
+				}
 				ex = ex.getNextException();
 			}
 		}
